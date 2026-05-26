@@ -175,3 +175,10 @@ I use code, diagrams, and documentation to validate system ideas — but my main
 
 ```text
 IoT + Backend + Database + System Design + AI-assisted workflow
+I am building toward a hybrid skillset where small systems are:
+
+- clear
+- testable
+- documented
+- fault-aware
+- easy to extend
