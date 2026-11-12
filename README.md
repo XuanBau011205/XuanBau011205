@@ -1,68 +1,95 @@
 # Hi, I'm Bau Doan
 
-I'm a student building toward **Backend, IoT, Database Design, and Mini System Architecture**.
+**Electronics & Telecommunications Engineering Student | Embedded Systems | IoT | Backend Integration**
 
-I focus on turning messy technical ideas into clear structures:
+I'm a fourth-year student at Hanoi University of Science and Technology (HUST), building practical systems at the intersection of **Embedded Firmware, Industrial IoT, and Backend Engineering**.
 
-- database schemas
-- ERD and table relationships
-- backend data flow
-- state logic
-- fault-aware system notes
-- Markdown technical documentation
+My focus is understanding how a system works as a whole — from sensor acquisition and firmware execution to communication protocols, backend processing, and data storage.
 
-My goal is not to write the most code, but to make small systems clearer before implementation starts.
+I care about building systems that are:
+
+- Structured and understandable
+- Reliable under imperfect conditions
+- Testable before deployment
+- Documented for future development
+- Practical within real hardware constraints
 
 ---
 
 ## Current Focus
 
-I'm currently learning and building around small IoT/backend systems where hardware data flows into a backend, database, and dashboard.
+I'm currently developing my skills in:
 
-Main areas:
+- **Embedded Firmware:** C/C++, ESP32, STM32, non-blocking execution, state machines.
+- **Industrial IoT:** MQTT, sensor acquisition, telemetry, device connectivity.
+- **Backend Integration:** Java, Spring Boot, REST APIs.
+- **Database Engineering:** PostgreSQL, SQL, data modeling.
+- **System Design:** Data flow, fault detection, protocol design, and system documentation.
 
-- IoT data flow
-- Backend system design
-- PostgreSQL database design
-- State machine / workflow logic
-- Sensor fault detection
-- Markdown-based technical documentation
-- AI-assisted development workflow
-
----
-
-## Featured Direction
-
-### Mini Backend Architecture
-
-I help small projects clarify backend logic before implementation.
-
-Typical deliverables:
-
-- database schema draft
-- ERD / relationship notes
-- backend data flow
-- state logic
-- fault/risk notes
-- clean Markdown documentation
+My long-term technical direction is Embedded Systems and Industrial IoT, with an interest in Edge AI as a future extension.
 
 ---
 
 ## Featured Projects
 
-### HVAC Two-Level Threshold Logic
+### 1. IoT Telemetry System
 
-A mini system design case study for HVAC control logic.
+<sub>ESP32-S3 | C/C++ | PlatformIO | MQTT | Spring Boot | PostgreSQL</sub>
 
-This project converts a natural-language requirement into:
+A small IoT monitoring system connecting sensor acquisition, embedded firmware, MQTT communication, and backend data processing.
 
-- input/output definitions
-- truth table
+**My role:** Team Leader (3 members), responsible for ESP32 firmware and communication protocol design.
+
+Key implementations:
+
+- Developed non-blocking firmware using a state-machine approach and System Tick Timer.
+- Separated sensor acquisition, digital filtering, and data transmission into independent periodic tasks.
+- Configured separate PlatformIO environments for physical hardware and Wokwi simulation.
+- Implemented MQ2 and DHT11 sensor sampling with digital filtering.
+- Designed a 16-byte binary communication protocol with CRC for data integrity checking.
+- Configured MQTT Last Will and Testament (LWT) to detect unexpected node disconnections.
+- Developed a Spring Boot and PostgreSQL backend to decode packets, store telemetry, and expose REST APIs.
+
+**Repositories:**
+- [IoT Telemetry Firmware](https://github.com/XuanBau011205/IoT-Telemetry)
+- [IoT Telemetry Backend](https://github.com/XuanBau011205/IoT-TelemetryBackend)
+
+---
+
+### 2. ECG Single-Lead Battery-Powered Device (P05)
+
+<sub>STM32F103C8T6 | AD8232 | C | Altium Designer</sub>
+
+An ongoing university project focused on designing a battery-powered single-lead ECG acquisition system.
+
+**My role:** Team Leader (3 members), responsible for schematic design and firmware development.
+
+Current work:
+
+- Designing the ECG acquisition schematic using the AD8232 analog front-end.
+- Developing the STM32F103C8T6 firmware structure.
+- Working toward R-peak detection and HRV calculation directly on the MCU.
+- Exploring low-level MCU programming with limited reliance on HAL libraries.
+
+**Status:** Schematic and firmware skeleton under development.
+
+---
+
+### 3. HVAC Two-Level Threshold Logic
+
+<sub>Logic Design | Boolean Algebra | Fault Detection | System Documentation</sub>
+
+A small system-design case study that translates natural-language HVAC control requirements into formal logic.
+
+Key deliverables:
+
+- Input/output definitions
+- Truth tables
 - Boolean equations
-- fault-state detection
-- architecture notes
+- Fault-state detection
+- Architecture documentation
 
-Key idea:
+One important design principle is identifying impossible states rather than treating every input combination as valid.
 
 | A | B | State |
 |---:|---:|---|
@@ -71,114 +98,94 @@ Key idea:
 | 1 | 1 | HIGH |
 | 1 | 0 | FAULT |
 
-The `10` state is treated as an impossible state and used for fault diagnosis.
+The `10` state represents an invalid condition and can be used for fault diagnosis.
 
-Repository: https://github.com/XuanBau011205/hvac_two_level_threshold_logic
-
----
-
-## Example Logic Pattern
-
-### Two-Level Threshold Logic
-
-A simple fault-aware logic pattern for sensor/control systems:
-
-| A: High Threshold | B: Low Threshold | State | Meaning |
-|---:|---:|---|---|
-| 0 | 0 | LOW | Below low threshold |
-| 0 | 1 | MEDIUM | Between low and high threshold |
-| 1 | 1 | HIGH | Above high threshold |
-| 1 | 0 | FAULT | Impossible state: high threshold active while low threshold is inactive |
-
-The key idea:
-
-> A good system should not only handle valid states. It should also detect impossible states.
+[View Repository](https://github.com/XuanBau011205/hvac_two_level_threshold_logic)
 
 ---
 
-## Project Types I Care About
+## Technical Skills
 
-- IoT dashboards
-- Sensor monitoring systems
-- Small backend applications
-- Database-first MVPs
-- Student projects
-- Technical design documents
-- Fault-aware control logic
+### Embedded Systems & Hardware
+- C / C++
+- ESP32, STM32F103
+- UART, SPI, I2C, Interrupts
+- Sensor acquisition and data filtering
+- Firmware state machines
+- Schematic design and hardware debugging
 
----
+### IoT & Communication
+- MQTT
+- HTTP / REST concepts
+- Binary communication protocols
+- CRC and data integrity
+- Device connectivity and telemetry
 
-## Tech Stack
-
-### Backend / Database
-
+### Backend & Database
 - Java
 - Spring Boot
 - PostgreSQL
 - SQL
-- REST API basics
+- REST API development
+- Backend integration with IoT devices
 
-### IoT / Embedded
+### Tools & Development
+- PlatformIO
+- Arduino IDE
+- Altium Designer
+- Logic Analyzer
+- Oscilloscope
+- Git / GitHub
+- Linux basics
+- Docker
 
-- ESP32 basics
-- C/C++ basics
-- Sensor data flow
-- MQTT / HTTP concepts
-
-### Documentation / Design
-
+### Documentation & Design
 - Markdown
-- Mermaid diagrams
+- Mermaid
 - ERD
-- State logic
-- Technical design notes
-
-### Frontend Basics
-
-- HTML
-- CSS
-- JavaScript
+- State machine diagrams
+- Technical design documentation
 
 ---
 
-## What I Can Help With
+## Engineering Approach
 
-I can help small projects with:
+I approach engineering problems from the system level before focusing on individual implementation details.
 
-- database schema review
-- ERD design
-- backend data flow documentation
-- state machine / workflow design
-- README and technical documentation
-- IoT sensor logic documentation
-- fault-state analysis for simple systems
+My typical workflow:
 
-Best fit:
+1. **Understand:** Identify requirements, constraints, and expected behavior.
+2. **Model:** Define data structures, states, interfaces, and system boundaries.
+3. **Design:** Break the system into manageable modules.
+4. **Implement:** Develop firmware and backend components.
+5. **Validate:** Test normal operation, edge cases, and fault conditions.
+6. **Document:** Record decisions, limitations, and possible improvements.
 
-- small apps
-- MVPs
-- IoT dashboards
-- student projects
-- early-stage backend/database design drafts
+I value clear interfaces and well-defined responsibilities between hardware, firmware, communication layers, and backend services.
+
+---
+
+## Future Learning Direction
+
+I'm gradually building toward deeper expertise in:
+
+- Embedded Linux and Industrial IoT
+- Reliable firmware architecture
+- Edge computing and Edge AI
+- Distributed sensor systems
+- Fault-tolerant system design
+
+I'm also learning German as part of my longer-term goal of developing an engineering career in Germany.
 
 ---
 
 ## Working Principle
 
-> Architecture reduces ambiguity. Engineering turns clarity into a working system.
+> Good engineering is not about adding complexity. It is about understanding constraints, defining responsibilities, and making each part work together reliably.
 
-I use code, diagrams, and documentation to validate system ideas — but my main focus is clarity, structure, and trade-off thinking.
+I prefer small, testable implementations over oversized architectures that are difficult to validate.
 
 ---
 
-## Current Direction
+**Currently building:** Embedded Firmware + Industrial IoT + Backend Integration.
 
-```text
-IoT + Backend + Database + System Design + AI-assisted workflow
-I am building toward a hybrid skillset where small systems are:
-
-- clear
-- testable
-- documented
-- fault-aware
-- easy to extend
