@@ -13,6 +13,7 @@ I care about building systems that are:
 - Testable before deployment
 - Documented for future development
 - Practical within real hardware constraints
+  
 [Tiếng Việt](README.vi.md)
 ---
 
