@@ -15,6 +15,7 @@ I care about building systems that are:
 - Practical within real hardware constraints
   
 [Tiếng Việt](README.vi.md)
+
 ---
 
 ## Current Focus
