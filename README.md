@@ -56,54 +56,6 @@ Key implementations:
 
 ---
 
-### 2. ECG Single-Lead Battery-Powered Device (P05)
-
-<sub>STM32F103C8T6 | AD8232 | C | Altium Designer</sub>
-
-An ongoing university project focused on designing a battery-powered single-lead ECG acquisition system.
-
-**My role:** Team Leader (3 members), responsible for schematic design and firmware development.
-
-Current work:
-
-- Designing the ECG acquisition schematic using the AD8232 analog front-end.
-- Developing the STM32F103C8T6 firmware structure.
-- Working toward R-peak detection and HRV calculation directly on the MCU.
-- Exploring low-level MCU programming with limited reliance on HAL libraries.
-
-**Status:** Schematic and firmware skeleton under development.
-
----
-
-### 3. HVAC Two-Level Threshold Logic
-
-<sub>Logic Design | Boolean Algebra | Fault Detection | System Documentation</sub>
-
-A small system-design case study that translates natural-language HVAC control requirements into formal logic.
-
-Key deliverables:
-
-- Input/output definitions
-- Truth tables
-- Boolean equations
-- Fault-state detection
-- Architecture documentation
-
-One important design principle is identifying impossible states rather than treating every input combination as valid.
-
-| A | B | State |
-|---:|---:|---|
-| 0 | 0 | LOW |
-| 0 | 1 | MEDIUM |
-| 1 | 1 | HIGH |
-| 1 | 0 | FAULT |
-
-The `10` state represents an invalid condition and can be used for fault diagnosis.
-
-[View Repository](https://github.com/XuanBau011205/hvac_two_level_threshold_logic)
-
----
-
 ## Technical Skills
 
 ### Embedded Systems & Hardware
