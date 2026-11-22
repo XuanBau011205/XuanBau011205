@@ -53,32 +53,41 @@ Các nội dung đã triển khai:
 - [IoT Telemetry Firmware](https://github.com/XuanBau011205/IoT-Telemetry)
 - [IoT Telemetry Backend](https://github.com/XuanBau011205/IoT-TelemetryBackend)
 
-### 2. Thiết bị ECG một đạo trình sử dụng pin (P05)
+### 2. Thiết bị đo ECG một đạo trình & phân tích HRV chạy pin (P05)
 
-`STM32F103C8T6` `AD8232` `C` `Altium Designer`
+`STM32F103C8T6` `AD8232` `INA219` `Altium Designer` `2-Layer PCB` `C (Q15 DSP)` `Python`
 
-Dự án học phần theo nhóm, tập trung thiết kế thiết bị thu tín hiệu ECG một đạo trình sử dụng nguồn pin.
+Dự án nghiên cứu – thiết kế thiết bị thu tín hiệu điện tim (ECG) một đạo trình chạy pin Li-ion, phát hiện đỉnh R và tính toán chỉ số HRV thời gian thực bằng toán học dấu phẩy tĩnh `Q15` trực tiếp trên MCU không FPU, tối ưu dòng ngủ sâu (`32.1 µA`) và kiểm thử tự động MIT-BIH Hardware-in-the-Loop (HIL).
 
-**Vai trò:** Trưởng nhóm (3 thành viên), phụ trách thiết kế schematic và phát triển firmware.
+**Vai trò:** Trưởng nhóm (3 thành viên), phụ trách thiết kế phần cứng (Schematic + PCB 2 lớp), kiến trúc firmware và khung mô phỏng bo ảo.
 
-Các nội dung đang thực hiện:
+| Mặt Top (`80 × 55 mm`, phân 4 vùng) | Mặt Bottom (GND liền khối >90% + 125 Stitching Vias) |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_top.png" alt="P05 ECG PCB Top Layer" width="380" /> | <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_bottom.png" alt="P05 ECG PCB Bottom Layer" width="380" /> |
 
-- Thiết kế schematic mạch thu tín hiệu ECG sử dụng analog front-end AD8232.
-- Xây dựng cấu trúc firmware cho STM32F103C8T6.
-- Phát triển chức năng phát hiện đỉnh R và tính toán HRV trực tiếp trên MCU.
-- Tìm hiểu lập trình MCU ở mức thấp với mức độ phụ thuộc hạn chế vào thư viện HAL.
+Các nội dung đã triển khai:
 
-**Trạng thái:** Đang hoàn thiện schematic và cấu trúc firmware (firmware skeleton).
+- Hoàn thiện sơ đồ nguyên lý và bộ thư viện chuẩn IPC-7351 trên Altium Designer (**91 linh kiện, `ERC = 0 Errors, 0 Warnings`**).
+- Thiết kế hoàn chỉnh **PCB 2 lớp kích thước `80.0 × 55.0 mm` (`DRC = 0 Violations`)**: tách biệt chặt vùng Analog AFE (`AD8232`) và vùng Digital (`STM32`, `SPI1`, `Power`), mặt GND đáy liền khối >90% kèm 125 stitching vias, đi dây vi sai ECG đối xứng (0 via) và bảo vệ thạch anh `8 MHz / 32.768 kHz`.
+- Thiết kế chuỗi nguồn siêu tiết kiệm năng lượng (mục tiêu `Stop Mode = 32.1 µA`): sạc Li-ion `MCP73831`, LDO `MCP1700`, đo dòng `INA219` + header PPK2 `J_IMEAS`, ngắt nguồn thẻ microSD bằng P-MOSFET `AO3401` và ngắt cầu đo pin bằng `2N7002`.
+- Tự động hóa bố trí linh kiện, đi dây vùng tín hiệu nhạy cảm và dọn lỗi silkscreen/DRC bằng Altium DelphiScript; xuất đầy đủ bộ file gia công kiểm chứng trên **JLCPCB Gerber Viewer** (Gerber RS-274X, NC Drill PTH/NPTH/Slot, BOM, Pick-and-Place).
+- Xây dựng khung firmware CMake zero-heap (`Q15` vs `Soft-Float`, Pan–Tompkins + nội suy Parabol, Ping-Pong DMA) và bản thiết kế **Python Digital Twin (`P05-Sim`)** (Unicorn ARM Cortex-M3 + Fast SIL + PySide6 Virtual Lab).
+
+**Trạng thái:** Hoàn thành Cổng Phần cứng G1 & G2 (`ERC = 0`, `DRC = 0`, sẵn sàng đặt mạch); đang chuyển sang triển khai firmware và khung mô phỏng Python.
+
+**Mã nguồn:**
+- [P05 STM32 Single-Lead ECG & HRV](https://github.com/XuanBau011205/stm32-single-lead-ecg-hrv)
+
 ---
 
 ## Kỹ năng kỹ thuật
 
 ### Embedded Systems và phần cứng
 - C / C++, ESP32, STM32F103.
-- UART, SPI, I2C, Interrupts.
-- Thu thập dữ liệu cảm biến và lọc số.
-- Firmware state machine.
-- Thiết kế schematic, kiểm tra và gỡ lỗi phần cứng.
+- UART, SPI, I2C, ADC/DMA, Interrupts.
+- Thu thập dữ liệu cảm biến và lọc số fixed-point (`Q15`).
+- Firmware state machine và tối ưu chế độ tiêu thụ thấp.
+- Thiết kế schematic, layout PCB 2 lớp hỗn hợp Analog/Digital (Altium Designer), xuất Gerber/BOM và gỡ lỗi phần cứng.
 
 ### IoT và truyền thông
 - MQTT.
