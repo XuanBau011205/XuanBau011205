@@ -55,28 +55,21 @@ Các nội dung đã triển khai:
 
 ### 2. Thiết bị đo ECG một đạo trình & phân tích HRV chạy pin (P05)
 
-`STM32F103C8T6` `AD8232` `INA219` `Altium Designer` `2-Layer PCB` `C (Q15 DSP)` `Python`
+`STM32F103C8T6` `AD8232` `INA219` `Altium Designer` `C (Q15 DSP)` `Python`
 
-Dự án nghiên cứu – thiết kế thiết bị thu tín hiệu điện tim (ECG) một đạo trình chạy pin Li-ion, phát hiện đỉnh R và tính toán chỉ số HRV thời gian thực bằng toán học dấu phẩy tĩnh `Q15` trực tiếp trên MCU không FPU, tối ưu dòng ngủ sâu (`32.1 µA`) và kiểm thử tự động MIT-BIH Hardware-in-the-Loop (HIL).
+Thiết bị thu tín hiệu điện tim (ECG) một đạo trình chạy pin Li-ion, phát hiện đỉnh R và tính HRV thời gian thực trên vi điều khiển ARM Cortex-M3 kết hợp mạch tương tự AD8232.
 
-**Vai trò:** Trưởng nhóm (3 thành viên), phụ trách thiết kế phần cứng (Schematic + PCB 2 lớp), kiến trúc firmware và khung mô phỏng bo ảo.
+**Vai trò:** Trưởng nhóm (3 thành viên), phụ trách thiết kế phần cứng (Schematic + PCB 2 lớp), kiến trúc firmware và mô phỏng bo ảo bằng Python.
 
-| Mặt Top (`80 × 55 mm`, phân 4 vùng) | Mặt Bottom (GND liền khối >90% + 125 Stitching Vias) |
-| :---: | :---: |
-| <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_top.png" alt="P05 ECG PCB Top Layer" width="380" /> | <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_bottom.png" alt="P05 ECG PCB Bottom Layer" width="380" /> |
+Điểm chính:
 
-Các nội dung đã triển khai:
+- Hoàn thiện sơ đồ nguyên lý và PCB 2 lớp `80 × 55 mm` trên Altium Designer (`ERC = 0`, `DRC = 0`, đủ bộ Gerber/BOM sẵn sàng đặt mạch).
+- Thiết kế chuỗi nguồn tối ưu tiêu thụ thấp (`Stop Mode = 32.1 µA`) với `INA219` đo dòng và MOSFET ngắt nguồn microSD/cầu đo pin.
+- Xây dựng cấu trúc firmware CMake zero-heap (`Q15` DSP + phát hiện đỉnh R/HRV) và lõi bo mạch ảo Python (`Unicorn` ARM Cortex-M3 + STM32F103 MMIO).
 
-- Hoàn thiện sơ đồ nguyên lý và bộ thư viện chuẩn IPC-7351 trên Altium Designer (**91 linh kiện, `ERC = 0 Errors, 0 Warnings`**).
-- Thiết kế hoàn chỉnh **PCB 2 lớp kích thước `80.0 × 55.0 mm` (`DRC = 0 Violations`)**: tách biệt chặt vùng Analog AFE (`AD8232`) và vùng Digital (`STM32`, `SPI1`, `Power`), mặt GND đáy liền khối >90% kèm 125 stitching vias, đi dây vi sai ECG đối xứng (0 via) và bảo vệ thạch anh `8 MHz / 32.768 kHz`.
-- Thiết kế chuỗi nguồn siêu tiết kiệm năng lượng (mục tiêu `Stop Mode = 32.1 µA`): sạc Li-ion `MCP73831`, LDO `MCP1700`, đo dòng `INA219` + header PPK2 `J_IMEAS`, ngắt nguồn thẻ microSD bằng P-MOSFET `AO3401` và ngắt cầu đo pin bằng `2N7002`.
-- Tự động hóa bố trí linh kiện, đi dây vùng tín hiệu nhạy cảm và dọn lỗi silkscreen/DRC bằng Altium DelphiScript; xuất đầy đủ bộ file gia công kiểm chứng trên **JLCPCB Gerber Viewer** (Gerber RS-274X, NC Drill PTH/NPTH/Slot, BOM, Pick-and-Place).
-- Xây dựng khung firmware CMake zero-heap (`Q15` vs `Soft-Float`, Pan–Tompkins + nội suy Parabol, Ping-Pong DMA) và bản thiết kế **Python Digital Twin (`P05-Sim`)** (Unicorn ARM Cortex-M3 + Fast SIL + PySide6 Virtual Lab).
-
-**Trạng thái:** Hoàn thành Cổng Phần cứng G1 & G2 (`ERC = 0`, `DRC = 0`, sẵn sàng đặt mạch); đang chuyển sang triển khai firmware và khung mô phỏng Python.
-
-**Mã nguồn:**
-- [P05 STM32 Single-Lead ECG & HRV](https://github.com/XuanBau011205/stm32-single-lead-ecg-hrv)
+**Liên kết:**
+- [Mã nguồn dự án (P05 ECG)](https://github.com/XuanBau011205/stm32-single-lead-ecg-hrv)
+- [Portfolio chi tiết kèm ảnh mạch](https://github.com/XuanBau011205/bau-portfolio)
 
 ---
 

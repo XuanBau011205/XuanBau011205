@@ -58,28 +58,21 @@ Key implementations:
 
 ### 2. Battery-Powered Single-Lead ECG & On-Device HRV Monitor (P05)
 
-<sub>STM32F103C8T6 | AD8232 | INA219 | Altium Designer (2-Layer PCB) | C (Q15 DSP) | Python</sub>
+<sub>STM32F103C8T6 | AD8232 | INA219 | Altium Designer | C (Q15 DSP) | Python</sub>
 
-A battery-powered single-lead biomedical ECG acquisition and real-time HRV analysis device built around an ARM Cortex-M3 MCU (no FPU) and a minimalist analog front-end (`AD8232`), designed for zero-heap Q15 fixed-point DSP, ultra-low-power Stop Mode (`32.1 µA` target), and automated MIT-BIH Hardware-in-the-Loop (HIL) validation.
+A battery-powered single-lead ECG acquisition and real-time HRV analysis device built around an ARM Cortex-M3 MCU and AD8232 analog front-end.
 
-**My role:** Team Leader (3 members), responsible for mixed-signal hardware design (schematic + 2-layer PCB), firmware architecture, and simulation framework.
+**My role:** Team Leader (3 members), responsible for mixed-signal hardware design (schematic + 2-layer PCB), firmware architecture, and Python virtual hardware simulation.
 
-| Top Layer (`80 × 55 mm`, 4-Zone Layout) | Bottom Layer (Solid GND Plane >90% + 125 Stitching Vias) |
-| :---: | :---: |
-| <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_top.png" alt="P05 ECG PCB Top Layer" width="380" /> | <img src="https://raw.githubusercontent.com/XuanBau011205/stm32-single-lead-ecg-hrv/main/docs/images/pcb_bottom.png" alt="P05 ECG PCB Bottom Layer" width="380" /> |
+Key highlights:
 
-Key implementations:
+- Completed schematic and 2-layer `80 × 55 mm` mixed-signal PCB in Altium Designer (`ERC = 0`, `DRC = 0`, fabrication-ready Gerber/BOM).
+- Designed an ultra-low-power supply tree (`32.1 µA` Stop Mode target) with `INA219` current monitoring and MOSFET power-gating for microSD & battery sensing.
+- Built a zero-heap CMake firmware structure (`Q15` DSP + R-peak/HRV pipeline) and a Python ARM Cortex-M3 virtual board twin (`Unicorn` + STM32F103 MMIO).
 
-- Completed full schematic capture and IPC-7351 custom component libraries in Altium Designer (**91 components, `ERC = 0 Errors, 0 Warnings`**).
-- Designed a compact **`80.0 × 55.0 mm` 2-layer mixed-signal PCB (`DRC = 0 Violations`)** with strict Analog/Digital spatial partitioning, >90% unbroken bottom GND plane, 125 stitching vias, symmetric 0-via differential ECG routing, and isolated 8 MHz HSE / 32.768 kHz LSE crystals.
-- Engineered an ultra-low-power supply tree (`32.1 µA` Stop Mode target): USB-C 5V-only Li-ion charging (`MCP73831`), `MCP1700` LDO, `INA219` I2C dynamic current monitor + `J_IMEAS` PPK2 header, `AO3401` microSD power-gating, and `2N7002` switched battery divider.
-- Automated zero-collision placement, critical analog/crystal pre-routing, and DRC/silkscreen cleanup via custom Altium DelphiScripts; exported factory-verified **JLCPCB Gerber RS-274X, PTH/NPTH/Slot NC Drill, BOM, and Pick-and-Place** packages.
-- Architected a zero-heap CMake firmware structure (`Q15` vs. `Soft-Float` Pan–Tompkins + parabolic R-peak interpolation + Ping-Pong DMA) and a **Python Virtual Hardware Twin (`P05-Sim`)** architecture (Unicorn ARM Cortex-M3 + Fast SIL + PySide6 Virtual Lab).
-
-**Status:** Hardware Gate G1 & G2 completed (`ERC = 0`, `DRC = 0`, fabrication files ready); moving into firmware implementation & Python Digital Twin validation.
-
-**Repository:**
-- [P05 STM32 Single-Lead ECG & HRV](https://github.com/XuanBau011205/stm32-single-lead-ecg-hrv)
+**Links:**
+- [Project Repository (P05 ECG)](https://github.com/XuanBau011205/stm32-single-lead-ecg-hrv)
+- [Full Visual Portfolio](https://github.com/XuanBau011205/bau-portfolio)
 
 ---
 
